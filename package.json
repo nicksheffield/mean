@@ -1,12 +1,12 @@
 {
-  "name": "app",
-  "version": "1.0.0",
-  "description": "",
+  "name": "means",
+  "version": "0.0.1",
+  "description": "by Nick Sheffield",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Nick Sheffield <numbereft@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.13.1",
@@ -33,5 +33,22 @@
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
     "vinyl-paths": "^1.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicksheffield/mean.git"
+  },
+  "keywords": [
+    "mean",
+    "node",
+    "angular",
+    "express",
+    "mongo",
+    "mongoose",
+    "socket.io"
+  ],
+  "bugs": {
+    "url": "https://github.com/nicksheffield/mean/issues"
+  },
+  "homepage": "https://github.com/nicksheffield/mean#readme"
 }
