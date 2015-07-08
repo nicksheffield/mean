@@ -7,6 +7,7 @@ by Nick Sheffield
 
 ```
 git clone https://github.com/nicksheffield/mean.git
+cd mean
 npm install
 ```
 
