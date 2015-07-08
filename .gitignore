@@ -1,2 +1,4 @@
 node_modules/
 client/components/
+client/assets/dist/app.min.js
+client/assets/dist/style.min.css

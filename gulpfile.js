@@ -31,7 +31,7 @@ gulp.task('styles', ['clean:styles'], function() {
 	// add more gulp.src()'s as extra parameters to the es.merge() below to include ordinary css files
 	var stream = es.merge(gulp.src('client/assets/css/style.styl').pipe(s).on('error', sFail))
 
-	.pipe(concatCss('style.css'))
+	.pipe(concatCss('style.min.css'))
 
 	.pipe(uglifycss())
 	
