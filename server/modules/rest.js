@@ -9,7 +9,14 @@
 	Creates a restful api.
 	
 	Returns an express router.
-
+	
+	
+	These are the requests that are created/supported
+	
+	GET    /api/resource/[:id][?query=params] Get one or many resources, queryable.
+	POST   /api/resource/                     Create a resource
+	PUT    /api/resource/:id                  Update one resource
+	DELETE /api/resource/:id                  Delete one resource
 
 */
 
