@@ -1,8 +1,8 @@
 angular.module('app.models')
 
-.factory('Example', ['$resource',
-	function($resource) {
-		var url = '/api/example/:id';
+.factory('Example', ['$resource', '$congif',
+	function($resource, $config) {
+		var url = $config.api_url+'/example/:id';
 
 		var defaults = {
 			'id': '@id'
