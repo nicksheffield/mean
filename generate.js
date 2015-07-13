@@ -8,10 +8,10 @@ var chalk = require('chalk');
 program
 	.version('0.0.1')
 	.usage('[options] <name>')
-	.option('-c, --n-controller', 'Make a Node controller')
+	.option('-n, --n-controller', 'Make an Express controller')
 	.option('-m, --model', 'Make a Mongoose model')
 	.option('-e, --event', 'Make a Socket.io event')
-	.option('-C, --a-controller', 'Make an Angular controller')
+	.option('-a, --a-controller', 'Make an Angular controller')
 	.option('-r, --resource', 'Make an Angular resource')
 	.option('-d, --directive', 'Make an Angular directive')
 	.option('-f, --filter', 'Make an Angular filter')
