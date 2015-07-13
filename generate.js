@@ -119,7 +119,7 @@ _.each(created, function(newFile){
 	console.log("    "+chalk.green('new'), newFile.dir+chalk.red.bold(newFile.name)+'.js');
 
 	if(program.sublime){
-		exec('sublime '+newFile.dir+(newFile.name).replace('$', '\$')+'.js', function(error, stdout, stderr) {
+		exec('sublime "'+newFile.dir+(newFile.name).replace('$', '\\$')+'.js"', function(error, stdout, stderr) {
 			// command output is in stdout
 		});
 	}
