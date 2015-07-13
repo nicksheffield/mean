@@ -4,7 +4,7 @@ angular.module('app.services', [])
 	function($rootScope, $config) {
 		var socket = io.connect($config.socket_url);
 
-		return {
+		var service = {
 			id: socket.id,
 			on: function(eventName, callback) {
 				socket.on(eventName, function() {
@@ -25,5 +25,7 @@ angular.module('app.services', [])
 				});
 			}
 		};
+		
+		return service;
 	}
 ]);
