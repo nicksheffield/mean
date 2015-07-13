@@ -28,17 +28,20 @@ Options:
 
   -h, --help          output usage information
   -V, --version       output the version number
-  -n, --n-controller  Make an Express controller
-  -m, --model         Make a Mongoose model
-  -e, --event         Make a Socket.io event
-  -a, --a-controller  Make an Angular controller
-  -r, --resource      Make an Angular resource
-  -d, --directive     Make an Angular directive
-  -f, --filter        Make an Angular filter
-  -s, --service       Make an Angular service
+  -n, --n-controller  make an Express controller
+  -m, --model         make a Mongoose model
+  -e, --event         make a Socket.io event
+  -a, --a-controller  make an Angular controller
+  -r, --resource      make an Angular resource
+  -d, --directive     make an Angular directive
+  -f, --filter        make an Angular filter
+  -s, --service       make an Angular service
+  -o, --sublime       open newly created files in sublime
 ```
 
 The generator.js file is capable of creating most of the necessary files you will need to build your mean project. This includes mongodb models, restful express controllers, and angular resources, among other things.
+
+**The -o flag will only work if you have a "sublime" command to open files in sublime**
 
 eg. Creating an angular resource, an express controller, and a mongodb model for a user.
 
