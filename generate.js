@@ -41,11 +41,11 @@ if(program.model){
 	console.log("    "+chalk.green('new'), '/server/models/'+chalk.red.bold(name)+'.js');
 }
 
-if(program.model){
+if(program.event){
 	var eventTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/event.js'));
 	fs.writeFile(__dirname + '/server/events/'+name+'.js', eventTemplate(data));
 	
-	console.log("    "+chalk.green('new'), '/server/models/'+chalk.red.bold(name)+'.js');
+	console.log("    "+chalk.green('new'), '/server/events/'+chalk.red.bold(name)+'.js');
 }
 
 if(program.aController){
