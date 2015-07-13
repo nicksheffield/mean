@@ -18,8 +18,10 @@ Then run index.js with node, nodemon, forever, pm2, whatever you like.
 ## Generator
 
 ```
-$ node generate --help
+node generate --help
+```
 
+```
   Usage: generate [options] <name>
 
   Options:
@@ -41,7 +43,7 @@ The generator.js file is capable of creating most of the necessary files you wil
 eg. Creating an angular resource, an express controller, and a mongodb model for a user.
 
 ```
-$ node generate -nrm user
+node generate -nrm user
 ```
 
 ---
