@@ -1,7 +1,7 @@
 angular.module('app.routes')
 
-.run(['$rootScope', '$state', 'Auth',
-	function($rootScope, $state, Auth) {
+.run(['$rootScope', '$state',
+	function($rootScope, $state) {
 
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 			if(!toState.data) return;

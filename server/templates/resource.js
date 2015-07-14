@@ -2,7 +2,7 @@ angular.module('app.models')
 
 .factory('<%- capitalizedName %>', ['$resource', '$config',
 	function($resource, $config) {
-		var url = $config.api_url+'/<%- name %>/:id';
+		var url = $config.restUrl+'/<%- name %>/:id';
 
 		var defaults = {
 			'id': '@id'

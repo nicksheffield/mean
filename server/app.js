@@ -92,9 +92,9 @@ io.on('connection', function(socket) {
 // ----------------------------------------------------------------------------
 // Start server
 // ----------------------------------------------------------------------------
-app.listen(config.port);
+app.listen(config.restPort);
 
-console.log(config.name+' running on '+config.domain+':'+config.port+'/');
+console.log(config.name+' running on '+config.domain+':'+config.restPort+'/');
 
 
 // ----------------------------------------------------------------------------

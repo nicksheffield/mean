@@ -15,6 +15,7 @@ var schema = new mongoose.Schema({
 	// set up your own schema here
 });
 
+// https://github.com/buunguyen/mongoose-deep-populate/blob/master/README.md
 schema.plugin(deepPopulate);
 
 

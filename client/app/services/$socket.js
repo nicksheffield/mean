@@ -1,4 +1,4 @@
-angular.module('app.services', [])
+angular.module('app.services')
 
 .factory('$socket', ['$rootScope', '$config',
 	function($rootScope, $config) {
