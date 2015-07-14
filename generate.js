@@ -31,85 +31,80 @@ var data = {
 
 var created = [];
 
+var templates = {
+	nController: '/server/templates/ncontroller.js',
+	model:       '/server/templates/model.js',
+	event:       '/server/templates/event.js',
+	aController: '/server/templates/acontroller.js',
+	resource:    '/server/templates/resource.js',
+	directive:   '/server/templates/directive.js',
+	filter:      '/server/templates/filter.js',
+	service:     '/server/templates/service.js'
+};
+
 console.log(' ');
 
 if(program.nController){
-	var nControllerTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/ncontroller.js'));
-	fs.writeFile(__dirname + '/server/controllers/'+name+'.js', nControllerTemplate(data));
-	
 	created.push({
 		name: name,
-		dir: 'server/controllers/'
+		dir: 'server/controllers/',
+		template: templates.nController
 	});
 }
 
 if(program.model){
-	var modelTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/model.js'));
-	fs.writeFile(__dirname + '/server/models/'+name+'.js', modelTemplate(data));
-	
 	created.push({
 		name: name,
-		dir: 'server/models/'
+		dir: 'server/models/',
+		template: templates.model
 	});
 }
 
 if(program.event){
-	var eventTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/event.js'));
-	fs.writeFile(__dirname + '/server/events/'+name+'.js', eventTemplate(data));
-	
 	created.push({
 		name: name,
-		dir: 'server/events/'
+		dir: 'server/events/',
+		template: templates.event
 	});
 }
 
 if(program.aController){
-	var aControllerTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/acontroller.js'));
-	fs.writeFile(__dirname + '/client/app/controllers/'+name+'Ctrl.js', aControllerTemplate(data));
-	
 	created.push({
 		name: name+'Ctrl',
-		dir: 'client/app/controllers/'
+		dir: 'client/app/controllers/',
+		template: templates.aController
 	});
 }
 
 if(program.resource){
-	var resourceTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/resource.js'));
-	fs.writeFile(__dirname + '/client/app/resources/'+capitalize(name)+'.js', resourceTemplate(data));
-	
 	created.push({
 		name: capitalize(name),
-		dir: 'client/app/resources/'
+		dir: 'client/app/resources/',
+		template: templates.resource
 	});
 }
 
 if(program.directive){
-	var directiveTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/directive.js'));
-	fs.writeFile(__dirname + '/client/app/directives/'+name+'.js', directiveTemplate(data));
-	
 	created.push({
 		name: name,
-		dir: 'client/app/directives/'
+		dir: 'client/app/directives/',
+		template: templates.directive
 	});
 }
 
 if(program.service){
-	var serviceTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/service.js'));
-	fs.writeFile(__dirname + '/client/app/services/$'+name+'.js', serviceTemplate(data));
-	
 	created.push({
 		name: '$'+name,
-		dir: 'client/app/services/'
+		dir: 'client/app/services/',
+		template: templates.service
 	});
 }
 
 if(program.filter){
-	var filterTemplate = _.template(fs.readFileSync(__dirname + '/server/templates/filter.js'));
-	fs.writeFile(__dirname + '/client/app/filters/'+name+'.js', filterTemplate(data));
-	
 	created.push({
 		name: name,
-		dir: 'client/app/filters/'
+		dir: 'client/app/filters/',
+		template: templates.filter
 	});
 }
 
@@ -117,6 +112,8 @@ if(program.filter){
 
 _.each(created, function(newFile){
 	console.log("    "+chalk.green('new'), newFile.dir+chalk.red.bold(newFile.name)+'.js');
+	
+	fs.writeFile(newFile.dir+newFile.name+'.js', _.template(fs.readFileSync(__dirname + newFile.template))(data));
 
 	if(program.sublime){
 		exec('sublime "'+newFile.dir+(newFile.name).replace('$', '\\$')+'.js"', function(error, stdout, stderr) {
