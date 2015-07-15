@@ -1,6 +1,6 @@
 {
-  "name": "means",
-  "version": "0.0.1",
+  "name": "mean",
+  "version": "0.1.0",
   "description": "by Nick Sheffield",
   "main": "app.js",
   "scripts": {

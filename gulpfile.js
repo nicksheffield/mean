@@ -52,7 +52,7 @@ gulp.task('styles', ['clean:styles'], function() {
 
 
 
-gulp.task('scripts', ['clean:scripts'], function() {
+gulp.task('angular', function() {
 	
 	var stream = gulp.src([
 		'client/app/app.js',
@@ -75,13 +75,40 @@ gulp.task('scripts', ['clean:scripts'], function() {
 	
 });
 
+gulp.task('libs', function() {
+	
+	// if you add more js bower components, add them to this list
+	// and they'll be included in libs.min.js
+	var stream = gulp.src([
+		'client/components/jquery/dist/jquery.min.js',
+		'client/components/angular/angular.min.js',
+		'client/components/angular-resource/angular-resource.min.js',
+		'client/components/angular-ui-router/release/angular-ui-router.min.js',
+		'client/components/angular-sanitize/angular-sanitize.min.js',
+		'client/components/lodash/lodash.min.js'
+	])
+	
+	.pipe(concat('libs.min.js'))
+	
+	.pipe(uglify({
+		mangle: false
+	}))
+	
+	.pipe(size())
+	
+	.pipe(gulp.dest('client/assets/dist'));
+	
+	return stream;
+	
+});
+
 
 
 
 
 gulp.task('clean:styles', function(cb){
 	
-	del(['client/assets/dist/style.css'], cb);
+	del(['client/assets/dist/style.min.css'], cb);
 	
 });
 
@@ -91,7 +118,10 @@ gulp.task('clean:styles', function(cb){
 
 gulp.task('clean:scripts', function(cb){
 	
-	del(['client/assets/dist/app.min.js'], cb);
+	del([
+		'client/assets/dist/app.min.js',
+		'client/assets/dist/libs.min.js'
+	], cb);
 	
 });
 
@@ -111,7 +141,8 @@ gulp.task('watch', function() {
 
 
 
+gulp.task('scripts', ['clean:scripts', 'angular', 'libs'], function(){});
 
 gulp.task('default', ['styles', 'scripts', 'watch'], function(){});
 
-gulp.task('clean', ['clean:styles', 'clean:scripts'], function(){})
+gulp.task('clean', ['clean:styles', 'clean:scripts'], function(){});

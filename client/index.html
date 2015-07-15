@@ -1,22 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-controller="mainCtrl">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>{{ pageTitle || 'Document'}}</title>
 	<link rel="stylesheet" href="assets/dist/style.min.css">
-	<script src="components/jquery/dist/jquery.min.js"></script>
-	<script src="components/angular/angular.min.js"></script>
+	<script src="assets/dist/libs.min.js"></script>
 </head>
-<body ng-controller="mainCtrl">
-	
+<body>
 	<div ui-view></div>
-	
-	
-	<script src="components/angular-resource/angular-resource.min.js"></script>
-	<script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="components/angular-sanitize/angular-sanitize.min.js"></script>
-	<script src="components/lodash/lodash.min.js"></script>
-	
 	<script src="assets/dist/app.min.js"></script>
 </body>
 </html>

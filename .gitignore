@@ -1,5 +1,7 @@
+# ignore all node modules, because of course
 node_modules/
 
+# ignore all angular site files
 client/app/controllers/*
 client/app/directives/*
 client/app/filters/*
@@ -8,10 +10,12 @@ client/app/services/*
 client/components/
 client/assets/dist/*
 
+# ignore all server site files
 server/controllers/*
 server/events/*
 server/models/*
 
+# keep a few of the necessary angular site files
 !client/app/controllers/mainCtrl.js
 !client/app/services/$config.js
 !client/app/services/$socket.js
