@@ -19,3 +19,4 @@ server/models/*
 !client/app/controllers/mainCtrl.js
 !client/app/services/$config.js
 !client/app/services/$socket.js
+!.gitkeep
