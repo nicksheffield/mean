@@ -6,9 +6,9 @@ by Nick Sheffield
 ## Install
 
 ```
-> git clone https://github.com/nicksheffield/mean.git
-> cd mean
-> npm install
+$ git clone https://github.com/nicksheffield/mean.git
+$ cd mean
+$ npm install
 ```
 
 Then run index.js with node, nodemon, forever, pm2, whatever you like.
@@ -18,7 +18,7 @@ Then run index.js with node, nodemon, forever, pm2, whatever you like.
 ## Generator
 
 ```
-> node generate --help
+$ node generate --help
 
     Usage: generate [options] <name>
     
@@ -44,7 +44,7 @@ The generator.js file is capable of creating most of the necessary files you wil
 eg. Creating an angular resource, an express controller, and a mongodb model for a user.
 
 ```
-> node generate -nrm user
+$ node generate -nrm user
 
     Creating 3 new files:
     new server/controllers/user.js
