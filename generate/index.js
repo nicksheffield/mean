@@ -53,7 +53,10 @@ if(cmd.filter)      f.push({ name: name,             dir: 'client/app/filters/',
 
 
 
-console.log(' ');
+if(f.length){
+	console.log(' ');
+	console.log('    Creating ' + f.length + ' new file' + ( f.length > 1 ? 's' : '' ) + ':');
+}
 
 _.each(f, function(newFile){
 	console.log(
