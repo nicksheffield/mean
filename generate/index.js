@@ -8,7 +8,7 @@ var _ = require('lodash');
 var chalk = require('chalk');
 
 cmd
-	.version('0.0.1')
+	.version('0.1.0')
 	.usage('[options] <name>')
 	.option('-n, --n-controller', 'make an Express controller')
 	.option('-m, --model', 'make a Mongoose model')
