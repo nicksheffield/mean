@@ -10,6 +10,8 @@ var deepPopulate = require('mongoose-deep-populate');
 // Schema
 // ----------------------------------------------------------------------------
 // http://mongoosejs.com/docs/guide.html
+var ObjectId = mongoose.Schema.Types.ObjectId;
+
 var schema = new mongoose.Schema({
 	created_at: {type: Date, default: new Date()}
 	// set up your own schema here

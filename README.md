@@ -57,3 +57,4 @@ $ node generate -nrm user
 ##Todo:
 
 -	Add passport
+- Add 404 if resource doesn't exist. ie, GET /api/user/55a5cdb8d1cc4e6d28a2a3cd

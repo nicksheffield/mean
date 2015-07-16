@@ -43,6 +43,7 @@ module.exports = function(name, model, router){
 		
 		// remove the _populate query if it exists
 		var pop = extractProp(query, '_populate');
+		var sort = extractProp(query, '_sort');
 		
 		// store the model
 		var m = model;
@@ -63,6 +64,10 @@ module.exports = function(name, model, router){
 		if(pop){
 			// then use deepPopulate to populate that record
 			m = m.deepPopulate(pop);
+		}
+		
+		if(sort){
+			m = m.sort(sort);
 		}
 		
 		// run the query
