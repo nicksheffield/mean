@@ -25,33 +25,30 @@ var name = String(cmd.args[0]).toLowerCase();
 
 var data = {
 	name: name,
-	capitalizedName: capitalize(name)
+	capitalizedName: caps(name)
+};
+
+var tpl = {
+	n: '/templates/ncontroller.js',
+	m: '/templates/model.js',
+	e: '/templates/event.js',
+	a: '/templates/acontroller.js',
+	r: '/templates/resource.js',
+	d: '/templates/directive.js',
+	f: '/templates/filter.js',
+	s: '/templates/service.js'
 };
 
 var f = []; // an array of the files to create
 
-var tpl = {
-	nController: '/templates/ncontroller.js',
-	model:       '/templates/model.js',
-	event:       '/templates/event.js',
-	aController: '/templates/acontroller.js',
-	resource:    '/templates/resource.js',
-	directive:   '/templates/directive.js',
-	filter:      '/templates/filter.js',
-	service:     '/templates/service.js'
-};
-
-
-if(cmd.nController) f.push({ name: name,             dir: 'server/controllers/',     template: tpl.nController });
-if(cmd.model)       f.push({ name: name,             dir: 'server/models/',          template: tpl.model });
-if(cmd.event)       f.push({ name: name,             dir: 'server/events/',          template: tpl.event });
-if(cmd.aController) f.push({ name: name + 'Ctrl',    dir: 'client/app/controllers/', template: tpl.aController });
-if(cmd.resource)    f.push({ name: capitalize(name), dir: 'client/app/resources/',   template: tpl.resource });
-if(cmd.directive)   f.push({ name: name,             dir: 'client/app/directives/',  template: tpl.directive });
-if(cmd.service)     f.push({ name: '$' + name,       dir: 'client/app/services/',    template: tpl.service });
-if(cmd.filter)      f.push({ name: name,             dir: 'client/app/filters/',     template: tpl.filter });
-
-
+if(cmd.nController) f.push({ name: name,          dir: 'server/controllers/',     template: tpl.n });
+if(cmd.model)       f.push({ name: name,          dir: 'server/models/',          template: tpl.m });
+if(cmd.event)       f.push({ name: name,          dir: 'server/events/',          template: tpl.e });
+if(cmd.aController) f.push({ name: name + 'Ctrl', dir: 'client/app/controllers/', template: tpl.a });
+if(cmd.resource)    f.push({ name: caps(name),    dir: 'client/app/resources/',   template: tpl.r });
+if(cmd.directive)   f.push({ name: name,          dir: 'client/app/directives/',  template: tpl.d });
+if(cmd.service)     f.push({ name: '$' + name,    dir: 'client/app/services/',    template: tpl.s });
+if(cmd.filter)      f.push({ name: name,          dir: 'client/app/filters/',     template: tpl.f });
 
 if(f.length){
 	console.log(' ');
@@ -77,10 +74,8 @@ _.each(f, function(newFile){
 	}
 	
 });
-
-
  
-function capitalize(str) {
+function caps(str) {
  	var split = str.split('');
  	split[0] = split[0].toUpperCase();
  	return split.join('');

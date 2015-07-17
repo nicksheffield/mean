@@ -1,6 +1,6 @@
 var mem = require('../modules/memory');
 
-function control(io, socket) {
+module.exports = function(io, socket) {
 
 	socket.on('<%- name %>', function(data) {
 		
@@ -8,6 +8,4 @@ function control(io, socket) {
 		
 	});
 
-}
-
-module.exports = control;
+};
