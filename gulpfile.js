@@ -7,6 +7,7 @@ var uglifycss     = require('gulp-uglifycss');
 var autoprefixer  = require('gulp-autoprefixer');
 var stylus        = require('gulp-stylus');
 var size          = require('gulp-filesize');
+var annotate      = require('gulp-ng-annotate');
 var gutil         = require('gulp-util');
 var es            = require('event-stream');
 var del           = require('del');
@@ -26,7 +27,7 @@ gulp.task('styles', ['clean:styles'], function() {
 		
 		console.log('yo!');
 		s.end();
-	}
+	};
 
 	// add more gulp.src()'s as extra parameters to the es.merge() below to include ordinary css files
 	var stream = es.merge(gulp.src('client/assets/css/style.styl').pipe(s).on('error', sFail))
@@ -63,9 +64,9 @@ gulp.task('angular', function() {
 	
 	.pipe(concat('app.min.js'))
 	
-	.pipe(uglify({
-		mangle: false
-	}))
+	.pipe(annotate())
+	
+	// .pipe(uglify())
 	
 	.pipe(size())
 	
@@ -90,9 +91,7 @@ gulp.task('libs', function() {
 	
 	.pipe(concat('libs.min.js'))
 	
-	.pipe(uglify({
-		mangle: false
-	}))
+	.pipe(uglify())
 	
 	.pipe(size())
 	
@@ -134,7 +133,7 @@ gulp.task('watch', function() {
 
 	gulp.watch(['client/assets/css/*.styl', 'client/assets/css/**/*.styl'], ['styles']);
 	
-	gulp.watch(['client/app/**/*.js', 'client/app/*.js'], ['scripts']);
+	gulp.watch(['client/app/**/*.js', 'client/app/*.js'], ['angular']);
 
 });
 
@@ -143,6 +142,6 @@ gulp.task('watch', function() {
 
 gulp.task('scripts', ['clean:scripts', 'angular', 'libs'], function(){});
 
-gulp.task('default', ['styles', 'scripts', 'watch'], function(){});
+gulp.task('default', ['styles', 'angular', 'libs', 'watch'], function(){});
 
 gulp.task('clean', ['clean:styles', 'clean:scripts'], function(){});

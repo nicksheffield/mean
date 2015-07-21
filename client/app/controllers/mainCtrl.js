@@ -1,9 +1,7 @@
 angular.module('app.controllers')
 
-.controller('mainCtrl', ['$scope',
-	function($scope) {
-		$scope.pageTitle = 'Your MEAN website';
-		
-		
-	}
-]);
+.controller('mainCtrl', function($scope) {
+	$scope.pageTitle = 'Your MEAN website';
+	
+	
+});

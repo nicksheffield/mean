@@ -1,7 +1,5 @@
 angular.module('app.controllers')
 
-.controller('<%- name %>Ctrl', ['$scope',
-	function($scope) {
-		
-	}
-]);
+.controller('<%- name %>Ctrl', function($scope) {
+	
+});
