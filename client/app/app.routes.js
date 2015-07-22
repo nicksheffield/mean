@@ -1,19 +1,16 @@
 angular.module('app.routes')
 
-.config(['$stateProvider', '$urlRouterProvider',
-	function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 
-		$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/');
 
-		$stateProvider
-
-			.state('main', {
-				url: '/',
-				templateUrl: 'app/views/example.html',
-				controller: 'mainCtrl',
-				data: {
-					requireLogin: false
-				}
-			});
-	}
-]);
+	$stateProvider
+		.state('main', {
+			url: '/',
+			templateUrl: 'app/views/example.html',
+			controller: 'mainCtrl',
+			data: {
+				requireLogin: false
+			}
+		});
+});

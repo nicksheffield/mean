@@ -9,6 +9,7 @@ var stylus        = require('gulp-stylus');
 var size          = require('gulp-filesize');
 var annotate      = require('gulp-ng-annotate');
 var gutil         = require('gulp-util');
+var jscs          = require('gulp-jscs');
 var es            = require('event-stream');
 var del           = require('del');
 var vinylPaths    = require('vinyl-paths');
@@ -62,11 +63,13 @@ gulp.task('angular', function() {
 		'client/app/**/*.js'
 	])
 	
+	.pipe(jscs())
+	
 	.pipe(concat('app.min.js'))
 	
 	.pipe(annotate())
 	
-	// .pipe(uglify())
+	.pipe(uglify())
 	
 	.pipe(size())
 	

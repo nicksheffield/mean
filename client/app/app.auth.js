@@ -1,18 +1,17 @@
 angular.module('app.routes')
 
-.run(['$rootScope', '$state',
-	function($rootScope, $state) {
+.run(function($rootScope, $state) {
 
-		$rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-			if(!toState.data) return;
+	$rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+		if (!toState.data) {
+			return;
+		}
 
-			var requireLogin = toState.data.requireLogin;
+		var requireLogin = toState.data.requireLogin;
 
-			// if the route needs login
-			if (requireLogin) {
-				
-			}
-		});
+		// if the route needs login
+		if (requireLogin) {
 
-	}
-]);
+		}
+	});
+});

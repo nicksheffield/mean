@@ -1,7 +1,7 @@
 angular.module('app.services')
 
 .factory('$socket', function($rootScope, $config) {
-	var socket = io.connect($config.socket_url);
+	var socket = io.connect($config.socketURL);
 
 	var service = {
 		id: socket.id,
