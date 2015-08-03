@@ -1,6 +1,6 @@
 angular.module('app.directives')
 
-.directive('<%- name %>', function(){
+.directive('<%- name %>', () =>{
 	function link(scope, el, attrs){
 		
 	}
@@ -9,7 +9,7 @@ angular.module('app.directives')
 		restrict: 'EA',
 		replace: false,
 		transclude: false,
-		link: link,
+		link,
 		scope: {
 			'<%- name %>': '='
 		}

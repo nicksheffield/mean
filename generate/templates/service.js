@@ -1,6 +1,6 @@
 angular.module('app.services')
 
-.factory('$<%- name %>', function(){
+.factory('$<%- name %>', () => {
 	var service = {
 		
 	};

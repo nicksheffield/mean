@@ -9,6 +9,7 @@ var stylus        = require('gulp-stylus');
 var size          = require('gulp-filesize');
 var annotate      = require('gulp-ng-annotate');
 var templateCache = require('gulp-angular-templatecache');
+var babel         = require('gulp-babel');
 var gutil         = require('gulp-util');
 var jscs          = require('gulp-jscs');
 var es            = require('event-stream');
@@ -64,9 +65,10 @@ gulp.task('angular', function() {
 		'angular/app.auth.js',
 		'angular/**/*.js'
 	])
-		.pipe(jscs())
-		.pipe(annotate())
-		.pipe(uglify());
+		.pipe(babel())
+		//.pipe(jscs())
+		.pipe(annotate());
+		//.pipe(uglify());
 	
 	// http://stackoverflow.com/questions/26088718/gulp-js-event-stream-merge-order
 	var stream = sq({objectMode: true}, jsStream, tplStream)

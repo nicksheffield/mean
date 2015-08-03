@@ -1,11 +1,11 @@
 angular.module('app.services')
 
-.factory('$socket', function($rootScope, $config) {
+.factory('$socket', ($rootScope, $config) => {
 	var socket = io.connect($config.socketURL);
 
 	var service = {
 		id: socket.id,
-		on: function(eventName, callback) {
+		on(eventName, callback) {
 			socket.on(eventName, function() {
 				var args = arguments;
 				$rootScope.$apply(function() {
@@ -13,7 +13,7 @@ angular.module('app.services')
 				});
 			});
 		},
-		emit: function(eventName, data, callback) {
+		emit(eventName, data, callback) {
 			socket.emit(eventName, data, function() {
 				var args = arguments;
 				$rootScope.$apply(function() {

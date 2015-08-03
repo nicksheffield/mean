@@ -1,7 +1,7 @@
-angular.module('filters')
+angular.module('app.filters')
 
-.filter('<%- name %>', function(){
-	return function(input){
+.filter('<%- name %>', () => {
+	return (input) => {
 
 		
 		return input;
