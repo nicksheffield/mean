@@ -26,7 +26,7 @@ var <%- capitalizedName %> = mongoose.models.<%- capitalizedName %>;
 // });
 
 // Set up the default GET/POST/PUT/DELETE of a REST api
-router = rest('<%- name %>', <%- capitalizedName %>, router);
+router.use(rest('<%- name %>', <%- capitalizedName %>, router));
 
 
 
