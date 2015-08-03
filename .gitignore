@@ -1,14 +1,16 @@
 # ignore all node modules, because of course
 node_modules/
 
-# ignore all angular site files
-client/app/controllers/*
-client/app/directives/*
-client/app/filters/*
-client/app/resources/*
-client/app/services/*
-client/components/
-client/assets/dist/*
+# ignore all angular files
+angular/controllers/*
+angular/directives/*
+angular/filters/*
+angular/resources/*
+angular/services/*
+angular/assets/dist/*
+
+# ignore all bower components
+public/components/
 
 # ignore all server site files
 server/controllers/*
@@ -16,7 +18,9 @@ server/events/*
 server/models/*
 
 # keep a few of the necessary angular site files
-!client/app/controllers/mainCtrl.js
-!client/app/services/$config.js
-!client/app/services/$socket.js
+!angular/controllers/mainCtrl.js
+!angular/services/$config.js
+!angular/services/$socket.js
+
+# keep all gitkeep files so that our empty folders don't vanish
 !.gitkeep

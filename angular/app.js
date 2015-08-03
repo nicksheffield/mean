@@ -4,6 +4,7 @@ angular.module('app.filters', []);
 angular.module('app.models', []);
 angular.module('app.services', []);
 angular.module('app.routes', []);
+angular.module('app.templates', []);
 
 angular.module('app', [
 	'ngResource',
@@ -15,7 +16,8 @@ angular.module('app', [
 	'app.filters',
 	'app.models',
 	'app.services',
-	'app.routes'
+	'app.routes',
+	'app.templates'
 ]);
 
 angular.element(document).ready(function() {

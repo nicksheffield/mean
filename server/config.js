@@ -22,7 +22,7 @@ config.controllerDir = './controllers';
 config.modelDir = './models';
 
 // folder holding all the public files, without a trailing slash
-config.clientDir = './client';
+config.clientDir = './public';
 
 // folder holding all the socket event files, without a trailing slash
 config.eventDir = './events';
