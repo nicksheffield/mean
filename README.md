@@ -6,9 +6,9 @@ by Nick Sheffield
 ## Install
 
 ```
-$ git clone https://github.com/nicksheffield/mean.git
-$ cd mean
-$ npm install
+git clone https://github.com/nicksheffield/mean.git
+cd mean
+npm install
 ```
 
 Then run index.js with node, nodemon, forever, pm2, whatever you like.
@@ -58,3 +58,4 @@ $ node generate -nrm user
 
 -	Add passport
 - Add 404 if resource doesn't exist. ie, GET /api/user/55a5cdb8d1cc4e6d28a2a3cd
+- Add automated tests
