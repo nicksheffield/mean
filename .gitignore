@@ -9,8 +9,9 @@ angular/resources/*
 angular/services/*
 angular/assets/dist/*
 
-# ignore all bower components
+# ignore all bower components and dist files
 public/components/
+public/dist/*
 
 # ignore all server site files
 server/controllers/*
