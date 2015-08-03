@@ -67,8 +67,8 @@ gulp.task('angular', function() {
 	])
 		.pipe(babel())
 		//.pipe(jscs())
-		.pipe(annotate());
-		//.pipe(uglify());
+		.pipe(annotate())
+		.pipe(uglify());
 	
 	// http://stackoverflow.com/questions/26088718/gulp-js-event-stream-merge-order
 	var stream = sq({objectMode: true}, jsStream, tplStream)
