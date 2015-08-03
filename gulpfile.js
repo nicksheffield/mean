@@ -133,7 +133,7 @@ gulp.task('watch', function() {
 
 	gulp.watch(['public/assets/css/*.styl', 'public/assets/css/**/*.styl'], ['styles']);
 	
-	gulp.watch(['app/**/*.js', 'app/*.js'], ['angular']);
+	gulp.watch(['angular/**/*.js', 'angular/*.js', 'angular/views/*.html'], ['angular']);
 
 });
 
