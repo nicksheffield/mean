@@ -13,10 +13,23 @@
 	
 	These are the requests that are created/supported
 	
-	GET    /api/resource/[:id][?query=params] Get one or many resources, queryable.
-	POST   /api/resource/                     Create a resource
-	PUT    /api/resource/:id                  Update one resource
-	DELETE /api/resource/:id                  Delete one resource
+	GET    /api/resource/[:id]     Get one or many resources
+	POST   /api/resource/          Create a resource
+	PUT    /api/resource/:id       Update one resource
+	DELETE /api/resource/:id       Delete one resource
+	
+	The GET route (without an id) can have a query string applied to narrow down results,
+	or do other useful things.
+	
+	Name 			Description									Example
+	---------------------------------------------------------------------
+	field 			Narrows results like a where query 			?email=user@example.com
+	_populate		Populates an ObjectId field 				?_popualte=posts
+	_sort			Sorts results 								?_sort=created_at
+	_withtrash		Includes soft-deleted records				?_withtrash=true
+	_trashed		Only get soft-deleted records				?_trashed=true
+	_hard			(DELETE request only) permanent delete 		?_hard=true
+	
 
 */
 
@@ -25,40 +38,44 @@
 // ----------------------------------------------------------------------------
 var _ = require('lodash');
 var express = require('express');
-var extractProp = require('extract-prop'); 
+var extractProp = require('extract-prop');
 
 // ----------------------------------------------------------------------------
 // Routes
 // ----------------------------------------------------------------------------
 
-module.exports = function(name, model, router){
-	
-	if(!router){
+module.exports = function(name, model, router) {
+
+	if (!router) {
 		router = express.Router();
 	}
-	
+
+
+	// ============================================================================
+	// Get one or many
+	// ============================================================================
+
 	router.get('/' + name + '/:id?', function(req, res) {
 		// store the query string
 		var query = req.query;
-		
+
 		// remove the _populate query if it exists
 		var pop = extractProp(query, '_populate');
 		var sort = extractProp(query, '_sort');
-		
 		var withTrash = extractProp(query, '_withtrash');
 		var trashed = extractProp(query, '_trashed');
 
 		// store the model
 		var m = model;
-		
+
 		// if the id was in the url
-		if(req.params.id){
+		if (req.params.id) {
 			// then add the id to the query
 			query._id = req.params.id;
-			
+
 			// find one document with the query
 			m = m.findOne(query);
-		}else{
+		} else {
 
 			// if the trashed query existed
 			if (trashed) {
@@ -76,20 +93,22 @@ module.exports = function(name, model, router){
 			// find many documents with the query
 			m = m.find(query);
 		}
-		
+
 		// if the _populate query existed
-		if(pop){
-			// then use deepPopulate to populate that record
+		if (pop) {
+			// then use deepPopulate to populate that field
 			m = m.deepPopulate(pop);
 		}
-		
-		if(sort){
+
+		// if the _sort query existed
+		if (sort) {
+			// then use it to sort the records
 			m = m.sort(sort);
 		}
-		
+
 		// run the query
-		m.exec(function(err, docs){
-			if(err){
+		m.exec(function(err, docs) {
+			if (err) {
 				res.send(err);
 				return;
 			}
@@ -110,13 +129,24 @@ module.exports = function(name, model, router){
 		});
 	});
 
+
+	// ============================================================================
+	// Create one
+	// ============================================================================
+
 	router.post('/' + name + '/', function(req, res) {
 		var doc = new model();
-		
+
+		// make sure we can't set the _id manually
+		delete req.body._id;
+
+		// merge the post data into the new model
 		doc = _.merge(doc, req.body);
-		
+
+		// save the document into the database
 		doc.save();
-		
+
+		// send it as json
 		res.send(doc);
 	});
 
@@ -136,8 +166,13 @@ module.exports = function(name, model, router){
 	});
 
 	router.put('/' + name + '/:id', function(req, res) {
-		model.findOne({ _id: req.params.id }, function(err, doc){
-			if(err){
+		// find one document with the id provided in the url param
+		model.findOne({
+			_id: req.params.id
+		}, function(err, doc) {
+
+			// if it wasn't found, then send the error
+			if (err) {
 				res.send(err);
 				return;
 			}
@@ -159,9 +194,11 @@ module.exports = function(name, model, router){
 
 			// merge the post data into the new model
 			doc = _.merge(doc, req.body);
-			
+
+			// save the document into the database
 			doc.save();
-			
+
+			// send it as json
 			res.send(doc);
 		});
 	});
@@ -182,8 +219,10 @@ module.exports = function(name, model, router){
 	});
 
 	router.delete('/' + name + '/:id', function(req, res) {
-		model.findOne({ _id: req.params.id }, function(err, doc){
-			if(err){
+		model.findOne({
+			_id: req.params.id
+		}, function(err, doc) {
+			if (err) {
 				res.send(err);
 				return;
 			}
