@@ -93,7 +93,19 @@ module.exports = function(name, model, router){
 				res.send(err);
 				return;
 			}
-			
+
+			// if the request is for one document and no document was found
+			if (req.params.id && !docs) {
+				// set the response status to 404
+				res.status(404);
+
+				// and send a json object containing information about what went wrong
+				res.send({
+					'status': '404',
+					'message': 'No ' + name + ' was found with an id of ' + req.params.id
+				});
+			}
+
 			res.send(docs);
 		});
 	});
@@ -108,18 +120,64 @@ module.exports = function(name, model, router){
 		res.send(doc);
 	});
 
+
+	// ============================================================================
+	// Update one
+	// ============================================================================
+
+	router.put('/' + name + '/', function(req, res) {
+		// catch missing id's instead of causing RangeError
+		res.status(404);
+
+		res.send({
+			'status': '404',
+			'message': 'No id provided in url'
+		});
+	});
+
 	router.put('/' + name + '/:id', function(req, res) {
 		model.findOne({ _id: req.params.id }, function(err, doc){
 			if(err){
 				res.send(err);
 				return;
 			}
-			
+
+			// if no document was found
+			if (!doc) {
+				// set the response status to 404
+				res.status(404);
+
+				// and send a json object containing information about what went wrong
+				res.send({
+					'status': '404',
+					'message': 'No ' + name + ' was found with an id of ' + req.params.id
+				});
+			}
+
+			// make sure we can't set the _id manually
+			delete req.body._id;
+
+			// merge the post data into the new model
 			doc = _.merge(doc, req.body);
 			
 			doc.save();
 			
 			res.send(doc);
+		});
+	});
+
+
+	// ============================================================================
+	// Delete one
+	// ============================================================================
+
+	router.delete('/' + name + '/', function(req, res) {
+		// catch missing id's instead of causing RangeError
+		res.status(404);
+
+		res.send({
+			'status': '404',
+			'message': 'No id provided in url'
 		});
 	});
 
@@ -129,9 +187,15 @@ module.exports = function(name, model, router){
 				res.send(err);
 				return;
 			}
-			
-			doc.remove();
-			
+
+			if (!doc) {
+				res.status(404);
+				res.send({
+					'status': '404',
+					'message': 'No ' + name + ' was found with an id of ' + req.params.id
+				});
+			}
+
 			// if the hard query existed on the url
 			if (req.query._hard) {
 
