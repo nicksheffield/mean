@@ -126,6 +126,23 @@ gulp.task('clean:scripts', function(cb){
 
 
 
+gulp.task('reset', function(){
+	del([
+		'angular/*/*.js',
+		'server/controllers/*.js',
+		'server/events/*.js',
+		'server/models/*.js',
+	], {
+		ignore: [
+			'angular/controllers/mainCtrl.js',
+			'angular/services/$config.js',
+			'angular/services/$socket.js'
+		]
+	} cb);
+})
+
+
+
 
 
 // watch those tasks, and run them once to begin with

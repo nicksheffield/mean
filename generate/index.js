@@ -18,6 +18,7 @@ cmd
 	.option('-d, --directive', 'make an Angular directive')
 	.option('-f, --filter', 'make an Angular filter')
 	.option('-s, --service', 'make an Angular service')
+	.option('-x, --rest', 'shortcut for -rnm')
 	.option('-o, --sublime', 'open newly created files in sublime')
 	.parse(process.argv);
 	
@@ -43,14 +44,20 @@ var tpl = {
 
 var f = []; // an array of the files to create
 
-if(cmd.nController) f.push({ name: name,          dir: 'server/controllers/',     template: tpl.n });
-if(cmd.model)       f.push({ name: name,          dir: 'server/models/',          template: tpl.m });
-if(cmd.event)       f.push({ name: name,          dir: 'server/events/',          template: tpl.e });
+if(cmd.nController) f.push({ name: name,          dir: 'server/controllers/',  template: tpl.n });
+if(cmd.model)       f.push({ name: name,          dir: 'server/models/',       template: tpl.m });
+if(cmd.event)       f.push({ name: name,          dir: 'server/events/',       template: tpl.e });
 if(cmd.aController) f.push({ name: name + 'Ctrl', dir: 'angular/controllers/', template: tpl.a });
 if(cmd.resource)    f.push({ name: caps(name),    dir: 'angular/resources/',   template: tpl.r });
 if(cmd.directive)   f.push({ name: name,          dir: 'angular/directives/',  template: tpl.d });
 if(cmd.service)     f.push({ name: '$' + name,    dir: 'angular/services/',    template: tpl.s });
 if(cmd.filter)      f.push({ name: name,          dir: 'angular/filters/',     template: tpl.f });
+
+if(cmd.rest){
+	f.push({ name: name,          dir: 'server/models/',       template: tpl.m });
+	f.push({ name: name,          dir: 'server/controllers/',  template: tpl.n });
+	f.push({ name: caps(name),    dir: 'angular/resources/',   template: tpl.r });
+}
 
 if(f.length){
 	console.log(' ');

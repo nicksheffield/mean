@@ -34,6 +34,7 @@ $ node generate --help
       -d, --directive     make an Angular directive
       -f, --filter        make an Angular filter
       -s, --service       make an Angular service
+      -x, --rest          shortcut for -rnm
       -o, --sublime       open newly created files in sublime
 ```
 
