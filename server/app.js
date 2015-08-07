@@ -12,7 +12,7 @@ var mongoose   = require('mongoose');
 var bodyParser = require('body-parser');
 var requireDir = require('require-dir');
 var morgan     = require('morgan');
-var io         = require('socket.io')(config.socketPort);
+var io         = require('socket.io')(config[config.environment].socketPort);
 
 
 // ----------------------------------------------------------------------------
@@ -64,10 +64,10 @@ var events = requireDir(config.eventDir);
 // ----------------------------------------------------------------------------
 // Connect to DB
 // ----------------------------------------------------------------------------
-mongoose.connect(config.db, function(err) {
+mongoose.connect(config[config.environment].db, function(err) {
 	if (err) console.log(err);
 	
-	else console.log('Connected to '+config.db+'!');
+	else console.log(' ----- MongoDB started\n');
 });
 
 
@@ -92,9 +92,11 @@ io.on('connection', function(socket) {
 // ----------------------------------------------------------------------------
 // Start server
 // ----------------------------------------------------------------------------
-app.listen(config.restPort);
+app.listen(config[config.environment].restPort);
 
-console.log(config.name+' running on '+config.domain+':'+config.restPort+'/');
+console.log(' ----- '+(new Date().toString()));
+console.log(' ----- Express started -> '+config[config.environment].domain+':'+config[config.environment].restPort+'/');
+console.log(' ----- Ctrl+C to stop');
 
 
 // ----------------------------------------------------------------------------
