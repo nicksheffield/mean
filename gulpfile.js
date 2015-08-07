@@ -126,7 +126,7 @@ gulp.task('clean:scripts', function(cb){
 
 
 
-gulp.task('reset', function(){
+gulp.task('reset', function(cb){
 	del([
 		'angular/*/*.js',
 		'server/controllers/*.js',
@@ -138,7 +138,7 @@ gulp.task('reset', function(){
 			'angular/services/$config.js',
 			'angular/services/$socket.js'
 		]
-	} cb);
+	}, cb);
 })
 
 
