@@ -1,7 +1,7 @@
 module.exports = {
 
 	// name of the application. Used in console logs, and database connection
-	name: 'test',
+	name: 'Test',
 	
 	// either development or production. This setting decides what options set below will be used
 	environment: 'development',
