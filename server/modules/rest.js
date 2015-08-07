@@ -45,6 +45,9 @@ module.exports = function(name, model, router){
 		var pop = extractProp(query, '_populate');
 		var sort = extractProp(query, '_sort');
 		
+		var withTrash = extractProp(query, '_withtrash');
+		var trashed = extractProp(query, '_trashed');
+
 		// store the model
 		var m = model;
 		
@@ -56,6 +59,20 @@ module.exports = function(name, model, router){
 			// find one document with the query
 			m = m.findOne(query);
 		}else{
+
+			// if the trashed query existed
+			if (trashed) {
+				// get all the documents where deleted_at is not false
+				query.deleted_at = {
+					$ne: false
+				};
+
+				// if the _withtrash query did not exist
+			} else if (!withTrash) {
+				// add a deleted_at field to the query
+				query.deleted_at = false;
+			}
+
 			// find many documents with the query
 			m = m.find(query);
 		}
@@ -115,6 +132,25 @@ module.exports = function(name, model, router){
 			
 			doc.remove();
 			
+			// if the hard query existed on the url
+			if (req.query._hard) {
+
+				// delete the record from the database
+				doc.remove();
+
+				// if not, then soft delete.s
+			} else {
+
+				// set the deleted_at date
+				doc.deleted_at = new Date();
+
+				// save the doc
+				doc.save();
+
+				// manually call the post remove hook
+				doc.$__.emitter._events.remove(doc);
+			}
+
 			res.send(doc);
 		});
 	});
