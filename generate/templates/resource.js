@@ -1,6 +1,6 @@
 angular.module('app.models')
 
-.factory('<%- capitalizedName %>', ($resource, $config) => {
+.factory('<%- capitalizedName %>', function($resource, $config) {
 	var url = `${$config.restURL}<%- name %>/:id`;
 
 	var defaults = {

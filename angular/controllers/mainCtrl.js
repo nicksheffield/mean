@@ -1,5 +1,5 @@
 angular.module('app.controllers')
 
-.controller('mainCtrl', ($scope) => {
+.controller('mainCtrl', function($scope) {
 	$scope.pageTitle = 'Your MEAN website';
 });
