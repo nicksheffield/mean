@@ -2,9 +2,9 @@
 
 	rest(name, model, router)
 	
-	Name is a string, which is the name of the resource.
-	Model is a mongoose model.
-	Router is an express router. If none is provided, it'll make it's own
+	Name is a string, which is the name of the resource. This is used in the urls.
+	Model is a mongoose model object.
+	Router is an express router object. If none is provided, it'll make it's own
 	
 	Creates a restful api.
 	
@@ -13,7 +13,7 @@
 	
 	These are the requests that are created/supported
 	
-	GET    /api/resource/[:id]     Get one or many resources
+	GET    /api/resource/[:id]     Get one or many resources, by providing id or not
 	POST   /api/resource/          Create a resource
 	PUT    /api/resource/:id       Update one resource
 	DELETE /api/resource/:id       Delete one resource
@@ -27,8 +27,8 @@
 	_populate		Populates an ObjectId field 				?_popualte=posts
 	_sort			Sorts results 								?_sort=created_at
 	_withtrash		Includes soft-deleted records				?_withtrash=true
-	_trashed		Only get soft-deleted records				?_trashed=true
-	_hard			(DELETE request only) permanent delete 		?_hard=true
+	_trashed		ONLY get soft-deleted records				?_trashed=true
+	_hard			(for DELETE request only) hard delete 		?_hard=true
 	
 
 */
