@@ -5,7 +5,7 @@ angular.module('app.services')
 
 	var service = {
 		id: socket.id,
-		on(eventName, callback) {
+		on: function(eventName, callback) {
 			socket.on(eventName, function() {
 				var args = arguments;
 				$rootScope.$apply(function() {
@@ -13,7 +13,7 @@ angular.module('app.services')
 				});
 			});
 		},
-		emit(eventName, data, callback) {
+		emit: function(eventName, data, callback) {
 			socket.emit(eventName, data, function() {
 				var args = arguments;
 				$rootScope.$apply(function() {
