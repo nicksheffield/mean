@@ -7,13 +7,13 @@ var config = require('./config');
 // ----------------------------------------------------------------------------
 // Dependencies
 // ----------------------------------------------------------------------------
-var express    = require('express');
-var mongoose   = require('mongoose');
+var express = require('express');
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var requireDir = require('require-dir');
-var morgan     = require('morgan');
-var figlet     = require('figlet');
-var io         = require('socket.io')(config[config.environment].socketPort);
+var morgan = require('morgan');
+var figlet = require('figlet');
+var io = require('socket.io')(config[config.environment].socketPort);
 
 
 // ----------------------------------------------------------------------------
@@ -55,6 +55,11 @@ for (var name in controllers) {
 	app.use('/api', controllers[name]);
 }
 
+app.get('/*', function(req, res) {
+	res.status(404);
+	res.send('404');
+});
+
 
 // ----------------------------------------------------------------------------
 // Events
@@ -67,7 +72,7 @@ var events = requireDir(config.eventDir);
 // ----------------------------------------------------------------------------
 mongoose.connect(config[config.environment].db, function(err) {
 	if (err) console.log(err);
-	
+
 	else console.log(' ----- MongoDB connected\n');
 });
 
@@ -95,11 +100,13 @@ io.on('connection', function(socket) {
 // ----------------------------------------------------------------------------
 app.listen(config[config.environment].restPort);
 
-figlet(config.name, {font:'slant'}, function(err, data) {
+figlet(config.name, {
+	font: 'slant'
+}, function(err, data) {
 	console.log(data);
 	console.log(' ');
-	console.log(' ----- '+(new Date().toString()));
-	console.log(' ----- Express started -> '+config[config.environment].domain+':'+config[config.environment].restPort+'/');
+	console.log(' ----- ' + (new Date().toString()));
+	console.log(' ----- Express started -> ' + config[config.environment].domain + ':' + config[config.environment].restPort + '/');
 	console.log(' ----- Ctrl+C to stop');
 });
 
