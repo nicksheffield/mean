@@ -1,6 +1,6 @@
 angular.module('app.services')
 
-.factory('$config', () => {
+.factory('$config', function() {
 	var config = {};
 
 	// the domain of the rest and socket api's
