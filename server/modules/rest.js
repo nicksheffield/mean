@@ -1,14 +1,12 @@
 /*
-
-	rest(name, model, router)
+	Rest middleware
 	
-	Name is a string, which is the name of the resource. This is used in the urls.
-	Model is a mongoose model object.
-	Router is an express router object. If none is provided, it'll make it's own
-	
-	Creates a restful api.
-	
-	Returns an express router.
+		rest(name, model)
+		
+		Creates a restful api.
+		
+		@name   String   The name of the resource. This is used in the urls.
+		@model  Object   Mongoose model object.
 	
 	
 	These are the requests that are created/supported
@@ -37,19 +35,13 @@
 // Dependencies
 // ----------------------------------------------------------------------------
 var _ = require('lodash');
-var express = require('express');
 var extractProp = require('extract-prop');
 
 // ----------------------------------------------------------------------------
 // Routes
 // ----------------------------------------------------------------------------
 
-module.exports = function(name, model, router) {
-
-	if (!router) {
-		router = express.Router();
-	}
-
+module.exports = function(name, model) {
 
 	// ============================================================================
 	// Get one or many
