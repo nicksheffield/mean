@@ -41,7 +41,6 @@ gulp.task('styles', ['clean:styles'], function() {
 			browsers: ['last 2 versions'],
 			cascade: false
 		}))
-		.pipe(size())
 		.pipe(gulp.dest('public/dist'));
 	
 	return stream;
@@ -73,7 +72,6 @@ gulp.task('angular', function() {
 	// http://stackoverflow.com/questions/26088718/gulp-js-event-stream-merge-order
 	var stream = sq({objectMode: true}, jsStream, tplStream)
 		.pipe(concat('app.min.js'))
-		.pipe(size())
 		.pipe(gulp.dest('public/dist'));
 	
 	return stream;
@@ -94,7 +92,6 @@ gulp.task('libs', function() {
 	])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
-		.pipe(size())
 		.pipe(gulp.dest('public/dist'));
 	
 	return stream;
