@@ -1,6 +1,5 @@
 {
 	"validateIndentation": "\t",
 	"requireLineFeedAtFileEnd": null,
-	"disallowTrailingWhitespace": "ignoreEmptyLines",
-	"disallowSpaceBeforeSemicolon": true
+	"disallowTrailingWhitespace": "ignoreEmptyLines"
 }
