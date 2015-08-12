@@ -22,7 +22,7 @@ cmd
 	.option('-o, --sublime', 'open newly created files in sublime')
 	.parse(process.argv);
 	
-_.templateSettings.interpolate = /<%-([\s\S]+?)%>/g;
+_.templateSettings.interpolate = /<%=([\s\S]+?)%>/g;
 
 var name = String(cmd.args[0]).toLowerCase();
 

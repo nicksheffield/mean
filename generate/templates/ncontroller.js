@@ -12,7 +12,7 @@ var mem = require('../modules/memory');
 // ----------------------------------------------------------------------------
 // Models
 // ----------------------------------------------------------------------------
-var <%- capitalizedName %> = mongoose.models.<%- capitalizedName %>;
+var <%= capitalizedName %> = mongoose.models.<%= capitalizedName %>;
 
 
 // ----------------------------------------------------------------------------
@@ -21,12 +21,12 @@ var <%- capitalizedName %> = mongoose.models.<%- capitalizedName %>;
 
 // custom routes can be added
 
-// router.get('/<%- name %>', function(req, res){
+// router.get('/<%= name %>', function(req, res){
 // 	res.send('yo!');
 // });
 
 // Set up the default GET/POST/PUT/DELETE of a REST api
-router.use(rest('<%- name %>', <%- capitalizedName %>));
+router.use(rest('<%= name %>', <%= capitalizedName %>));
 
 
 

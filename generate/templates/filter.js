@@ -1,6 +1,6 @@
 angular.module('app.filters')
 
-.filter('<%- name %>', function() {
+.filter('<%= name %>', function() {
 	return function(input) {
 
 		
