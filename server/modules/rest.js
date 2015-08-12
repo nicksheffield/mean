@@ -22,7 +22,7 @@
 	Name 			Description									Example
 	---------------------------------------------------------------------
 	field 			Narrows results like a where query 			?email=user@example.com
-	_populate		Populates an ObjectId field 				?_popualte=posts
+	_populate		Populates an ObjectId field 				?_populate=posts
 	_sort			Sorts results 								?_sort=created_at
 	_withtrash		Includes soft-deleted records				?_withtrash=true
 	_trashed		ONLY get soft-deleted records				?_trashed=true
