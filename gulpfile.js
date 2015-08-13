@@ -12,12 +12,14 @@ var addsrc        = require('gulp-add-src')                 // mid-stream gulp.s
 var plumber       = require('gulp-plumber')                 // handle errors without crashing
 var filelog       = require('gulp-filelog')                 // list all files in the stream
 var stylish       = require('gulp-jscs-stylish')            // make jscs output nicer
+var beautify      = require('gulp-beautify')                // make files human readable
 var annotate      = require('gulp-ng-annotate')             // safely minify angular
 var minifycss     = require('gulp-minify-css')              // minify css code
 var sourcemap     = require('gulp-sourcemaps')              // create sourcemaps
 var autoprefix    = require('gulp-autoprefixer')            // prefix any css with low support
 var templateCache = require('gulp-angular-templatecache')   // cache angular template files
 
+var dist = 'public/dist/';
 
 
 gulp.task('css', function() {
@@ -28,11 +30,12 @@ gulp.task('css', function() {
 		.pipe(stylus())                                     // turn the stylus into css
 		.pipe(sourcemap.write())                            // write the sourcemap
 		.pipe(autoprefix('last 2 versions'))                // autoprefix the css code
-		.pipe(gulp.dest('public/dist/'))                    // save it into the dist folder
+		.pipe(beautify())
+		.pipe(gulp.dest(dist))                              // save it into the dist folder
 		.pipe(minifycss())                                  // minify it (removes the sourcemap)
 		.pipe(sourcemap.write())                            // write the sourcemap
 		.pipe(rename('style.min.css'))                      // add .min to the filename
-		.pipe(gulp.dest('public/dist/'))                    // save it into the dist folder
+		.pipe(gulp.dest(dist))                              // save it into the dist folder
 	
 	return stream
 
@@ -54,13 +57,13 @@ gulp.task('angular', function() {
 		.pipe(order(['app.js']))                            // make sure app.js is first
 		//.pipe(filelog())                                  // log the files in the stream
 		.pipe(babel())                                      // enable ES2015 support
-		.pipe(jscs())                                       // javascript code style
+		.pipe(jscs())                                       // check js code style
 		.on('error', function(){})                          // suppress jscs error reporting
 		.pipe(stylish())                                    // third-party jscs error reporting
 		.pipe(annotate())                                   // make angular callbacks minifyable
 		.pipe(uglify())                                     // minify the code
 		.pipe(concat('app.min.js'))                         // merge them all into the same file
-		.pipe(gulp.dest('public/dist/'))                    // save it into the dist folder
+		.pipe(gulp.dest(dist))                              // save it into the dist folder
 		
 	return stream
 	
@@ -84,7 +87,7 @@ gulp.task('libs', function() {
 	var stream = gulp.src(libs)                             // get all the lib files
 		.pipe(concat('libs.min.js'))                        // merge them together
 		.pipe(uglify())                                     // minify the js
-		.pipe(gulp.dest('public/dist/'))                    // save it into the dist folder
+		.pipe(gulp.dest(dist))                              // save it into the dist folder
 	
 	return stream
 	
@@ -100,8 +103,8 @@ gulp.task('reset', function(){
 		'server/events/*.js',
 		'server/models/*.js',
 		'server/views/*.html',
-		'public/dist/*.css',
-		'public/dist/*.js'
+		dist + '*.css',
+		dist + '*.js'
 	], {
 		ignore: [
 			'angular/controllers/mainCtrl.js',
