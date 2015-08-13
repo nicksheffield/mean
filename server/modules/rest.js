@@ -35,6 +35,7 @@
 // Dependencies
 // ----------------------------------------------------------------------------
 var _ = require('lodash');
+var express = require('express');
 var extractProp = require('extract-prop');
 
 // ----------------------------------------------------------------------------
@@ -42,6 +43,8 @@ var extractProp = require('extract-prop');
 // ----------------------------------------------------------------------------
 
 module.exports = function(name, model) {
+	
+	var router = express.Router();
 
 	// ============================================================================
 	// Get one or many
