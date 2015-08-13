@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "bower install; gulp scripts; gulp styles;"
+    "install": "bower install; gulp;"
   },
   "author": "Nick Sheffield <numbereft@gmail.com>",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-babel": "^5.2.0",
+    "gulp-beautify": "^1.1.2",
     "gulp-concat": "^2.6.0",
     "gulp-filelog": "^0.4.1",
     "gulp-insert": "^0.5.0",
