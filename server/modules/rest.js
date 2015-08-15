@@ -43,7 +43,7 @@ var extractProp = require('extract-prop');
 // ----------------------------------------------------------------------------
 
 module.exports = function(name, model) {
-	
+
 	var router = express.Router();
 
 	// ============================================================================
@@ -59,6 +59,13 @@ module.exports = function(name, model) {
 		var sort = extractProp(query, '_sort');
 		var withTrash = extractProp(query, '_withtrash');
 		var trashed = extractProp(query, '_trashed');
+		var first = extractProp(query, '_first');
+		
+		// make sure to turn all boolean strings into real booleans
+		for(var prop in query){
+			if(query[prop] === 'false') query[prop] = false;
+			if(query[prop] === 'true') query[prop] = true;
+		}
 
 		// store the model
 		var m = model;
@@ -85,8 +92,13 @@ module.exports = function(name, model) {
 				query.deleted_at = false;
 			}
 
-			// find many documents with the query
-			m = m.find(query);
+			if (!first) {
+				// find many documents with the query
+				m = m.find(query);
+			} else {
+				m = m.findOne(query);
+			}
+
 		}
 
 		// if the _populate query existed
@@ -104,7 +116,11 @@ module.exports = function(name, model) {
 		// run the query
 		m.exec(function(err, docs) {
 			if (err) {
-				res.send(err);
+				console.log(err);
+				res.status(500)
+				res.send({
+					'error': 'Mongoose encountered an error. Check server logs.'
+				});
 				return;
 			}
 
@@ -168,7 +184,11 @@ module.exports = function(name, model) {
 
 			// if it wasn't found, then send the error
 			if (err) {
-				res.send(err);
+				console.log(err);
+				res.status(500)
+				res.send({
+					'error': 'Mongoose encountered an error. Check server logs.'
+				});
 				return;
 			}
 
@@ -218,7 +238,11 @@ module.exports = function(name, model) {
 			_id: req.params.id
 		}, function(err, doc) {
 			if (err) {
-				res.send(err);
+				console.log(err)
+				res.status(500)
+				res.send({
+					'error': 'Mongoose encountered an error. Check server logs.'
+				});
 				return;
 			}
 
