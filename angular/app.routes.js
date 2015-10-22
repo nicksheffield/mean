@@ -7,7 +7,7 @@ angular.module('app.routes')
 	$stateProvider
 		.state('main', {
 			url: '/',
-			templateUrl: 'main.html',
+			templateUrl: 'views/main.html',
 			controller: 'mainCtrl',
 			data: {
 				requireLogin: false

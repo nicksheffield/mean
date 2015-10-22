@@ -18,7 +18,6 @@ var annotate      = require('gulp-ng-annotate')             // safely minify ang
 var beautify      = require('gulp-cssbeautify')             // make files human readable
 var minifycss     = require('gulp-minify-css')              // minify css code
 var sourcemap     = require('gulp-sourcemaps')              // create sourcemaps
-var combinemq     = require('gulp-combine-media-queries')   // merge all same media queries
 var autoprefix    = require('gulp-autoprefixer')            // prefix any css with low support
 var templateCache = require('gulp-angular-templatecache')   // cache angular template files
 
@@ -27,7 +26,7 @@ var paths = {
 		files: ['public/assets/css/*.styl'],
 		main: 'public/assets/css/style.styl'
 	},
-	views: ['angular/views/*.html'],
+	views: ['angular/**/*.html'],
 	angular: ['angular/*.js', 'angular/**/*.js'],
 	output: 'public/dist/'
 }
@@ -43,7 +42,6 @@ gulp.task('css', function() {
 		.pipe(plumber(plumberOpts))                   // notify us if any errors appear
 		.pipe(sourcemap.init())                       // get ready to write a sourcemap
 		.pipe(stylus())                               // turn the stylus into css
-		.pipe(combinemq())                            // put all the media queries at the bottom
 		.pipe(sourcemap.write())                      // write the sourcemap
 		.pipe(autoprefix('last 2 versions'))          // autoprefix the css code
 	
@@ -143,7 +141,8 @@ gulp.task('reset', function(){
 gulp.task('watch', ['angular', 'css'], function() {
 	
 	gulp.watch(paths.stylus.files, ['css'])
-	gulp.watch(['angular/**/*.js', 'angular/*.js', 'angular/views/*.html'], ['angular'])
+	gulp.watch(paths.angular,      ['angular'])
+	gulp.watch(paths.views,        ['angular'])
 	
 })
 
